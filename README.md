@@ -1,1 +1,1 @@
-React implementation of [http://hrtest.alycedev.com/](alyce cart) for  Alyce
+React implementation of [alyce cart](http://hrtest.alycedev.com/) for  Alyce
