@@ -30,7 +30,7 @@ const UserList = () => {
       ) : (
         <>
           <h2>Users</h2>
-          {Array.isArray(users) && users.map((oneUser) => {
+          {users.map((oneUser) => {
             const {
               name, id, apples,
             } = oneUser;

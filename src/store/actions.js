@@ -23,6 +23,11 @@ export const grabApple = (userId) => ({
   userId,
 });
 
+export const grabAppleSuccess = (response) => ({
+  type: types.GRAB_APPLE_SUCCESS,
+  payload: { response },
+});
+
 export const freeAllApples = () => ({
   type: types.FREE_ALL_APPLES,
 });

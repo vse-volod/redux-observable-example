@@ -8,21 +8,26 @@ const INITIAL_STATE = {
   users: [],
   basket: [],
   error: null,
-  loading: false,
 };
 
 function reducer(state = INITIAL_STATE, { type, payload }) {
   switch (type) {
     case types.FETCH_USERS_SUCCESS:
-      return {
+      return Array.isArray(payload.response) ? {
         ...state,
         users: payload.response,
-      };
-    case types.FETCH_BASKET_SUCCESS:
+      } : state;
+    case types.GRAB_APPLE_SUCCESS:
       return {
         ...state,
-        basket: payload.response,
+        users: state.users
+          .map((u) => (u.id === payload.response.user.id ? payload.response.user : u)),
       };
+    case types.FETCH_BASKET_SUCCESS:
+      return Array.isArray(payload.response) ? {
+        ...state,
+        basket: payload.response,
+      } : state;
     case types.DISPLAY_ERROR_MESSAGE:
       return payload.message
         ? {

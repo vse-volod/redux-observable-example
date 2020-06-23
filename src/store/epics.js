@@ -39,9 +39,9 @@ export const grapAppleEpic = (action$) => action$.pipe(
     url: `${baseUrl}/users/${action.userId}/grab`,
   })
     .pipe(
-      mergeMap(() => of(
+      mergeMap((response) => of(
+        actions.grabAppleSuccess(response.response),
         actions.fetchBasket(),
-        actions.fetchUsers(),
       )),
       catchError((error) => actions.displayErrorMessage(error.xhr.response)),
     )),
