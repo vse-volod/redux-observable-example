@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { stopFetchingUsers, startFetchingUsers } from '../store/actions';
+import { fetchUsers } from '../store/actions';
 import UserList from '../components/UserList';
 
 const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(startFetchingUsers());
-    return () => {
-      dispatch(stopFetchingUsers());
-    };
+    dispatch(fetchUsers());
   }, [dispatch]);
   return (
     <div>

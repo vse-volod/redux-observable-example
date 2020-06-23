@@ -19,6 +19,7 @@ const useUsers = () => useSelector((state) => ({
 const UserList = () => {
   const { users, error } = useUsers();
   console.log('users:', users);
+  console.log('error:', error);
 
   return (
     <div>
@@ -26,10 +27,10 @@ const UserList = () => {
         <p>We encountered and error.</p>
       ) : (
         <>
-          {Array.isArray(users) && users.map((userInfo) => {
+          {Array.isArray(users) && users.map((oneUser) => {
             const {
               name, id, apples,
-            } = userInfo;
+            } = oneUser;
             return (
               <UserInfo key={id}>
                 <h3>
