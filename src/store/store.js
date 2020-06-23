@@ -6,6 +6,7 @@ import * as types from './actionTypes';
 
 const INITIAL_STATE = {
   users: [],
+  basket: [],
   error: null,
   loading: false,
 };
@@ -17,22 +18,17 @@ function reducer(state = INITIAL_STATE, { type, payload }) {
         ...state,
         users: payload.response,
       };
+    case types.FETCH_BASKET_SUCCESS:
+      return {
+        ...state,
+        basket: payload.response,
+      };
     case types.DISPLAY_ERROR_MESSAGE:
       return payload.message
         ? {
           ...state,
           error: payload.message,
         } : state;
-    case types.START_FETCHING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.STOP_FETCHING:
-      return {
-        ...state,
-        loading: false,
-      };
     default:
       return state;
   }

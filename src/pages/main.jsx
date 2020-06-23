@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchUsers } from '../store/actions';
+import { fetchUsers, fetchBasket } from '../store/actions';
 import UserList from '../components/UserList';
+import Basket from '../components/Basket';
+import Layout from '../components/Layout';
 
 const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
+    dispatch(fetchBasket());
   }, [dispatch]);
   return (
-    <div>
+    <Layout>
       <UserList />
-    </div>
+      <Basket />
+    </Layout>
   );
 };
 
