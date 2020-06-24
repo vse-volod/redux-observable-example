@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
-function reducer(state = INITIAL_STATE, { type, payload }) {
+export function reducer(state = INITIAL_STATE, { type, payload }) {
   switch (type) {
     case types.FETCH_USERS_SUCCESS:
       return Array.isArray(payload.response) ? {
