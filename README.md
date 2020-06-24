@@ -1,6 +1,6 @@
 React implementation of [alyce cart](http://hrtest.alycedev.com/) for  Alyce
 
-<!-- [Demo]() -->
+[Demo](https://alyce.vsevolod.vercel.app/)
 
 ## Usage
 1. clone repo
