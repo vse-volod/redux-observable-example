@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 import {
-  mergeMap, catchError, map,
+  map, mergeMap, delay, catchError, throttleTime,
 } from 'rxjs/operators';
 import { combineEpics, ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
@@ -10,6 +10,7 @@ import * as types from './actionTypes';
 
 const corsProxy = 'https://cors-anywhere.herokuapp.com';
 const baseUrl = `${corsProxy}/http://hrtest.alycedev.com`;
+const timeInterval = 5000;
 
 export const fetchUsersEpic = (action$) => action$.pipe(
   ofType(types.FETCH_USERS),
@@ -39,10 +40,10 @@ export const grapAppleEpic = (action$) => action$.pipe(
     url: `${baseUrl}/users/${action.userId}/grab`,
   })
     .pipe(
-      mergeMap((response) => of(
+      mergeMap((response) => (response.response && response.response.success ? of(
         actions.grabAppleSuccess(response.response),
         actions.fetchBasket(),
-      )),
+      ) : of(actions.displayErrorMessage(response.response.message || response)))),
       catchError((error) => actions.displayErrorMessage(error.xhr.response)),
     )),
 );
@@ -61,9 +62,17 @@ export const freeAllApplesEpic = (action$) => action$.pipe(
     )),
 );
 
+export const hideErrorMessageEpic = (action$) => action$.pipe(
+  ofType(types.DISPLAY_ERROR_MESSAGE),
+  mergeMap(() => of(actions.hideErrorMessage())),
+  throttleTime(timeInterval),
+  delay(timeInterval),
+);
+
 export const rootEpic = combineEpics(
   fetchUsersEpic,
   fetchBasketEpic,
   grapAppleEpic,
   freeAllApplesEpic,
+  hideErrorMessageEpic,
 );

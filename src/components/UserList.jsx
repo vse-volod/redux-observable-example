@@ -14,55 +14,46 @@ const UserInfo = styled.div`
 
 const useUsers = () => useSelector((state) => ({
   users: state.users,
-  error: state.error,
 }));
 
 const UserList = () => {
-  const { users, error } = useUsers();
+  const { users } = useUsers();
   const dispatch = useDispatch();
-  console.log('users:', users);
-  console.log('error:', error);
 
   return (
     <div>
-      {error || !users ? (
-        <p>We encountered and error.</p>
-      ) : (
-        <>
-          <h2>Users</h2>
-          {users.map((oneUser) => {
-            const {
-              name, id, apples,
-            } = oneUser;
-            return (
-              <UserInfo key={id}>
-                <h3>
-                  Name:
-                  {name}
-                </h3>
-                <p>
-                  Id:
-                  {id}
-                </p>
-                <p>
-                  number of apples:
-                  {apples ? apples.length : 0}
-                </p>
-                <p>apples:</p>
-                {apples && apples.map((a) => (
-                  <p key={a.id}>
-                    Apple
-                    {a.id}
-                  </p>
-                ))}
-                <button type="button" onClick={() => dispatch(grabApple(id))}>
-                  Grab Apple
-                </button>
-              </UserInfo>
-            );
-          })}
-        </>
-      )}
+      <h2>Users</h2>
+      {users.map((oneUser) => {
+        const {
+          name, id, apples,
+        } = oneUser;
+        return (
+          <UserInfo key={id}>
+            <h3>
+              Name:
+              {name}
+            </h3>
+            <p>
+              Id:
+              {id}
+            </p>
+            <p>
+              number of apples:
+              {apples ? apples.length : 0}
+            </p>
+            <p>apples:</p>
+            {apples && apples.map((a) => (
+              <p key={a.id}>
+                Apple
+                {a.id}
+              </p>
+            ))}
+            <button type="button" onClick={() => dispatch(grabApple(id))}>
+              Grab Apple
+            </button>
+          </UserInfo>
+        );
+      })}
       <button type="button" onClick={() => dispatch(freeAllApples())}>Free Apples</button>
     </div>
   );

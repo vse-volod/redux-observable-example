@@ -10,12 +10,12 @@ const BasketItem = styled.div`
   color: white;
 `;
 
-const useUsers = () => useSelector((state) => ({
+const useBasket = () => useSelector((state) => ({
   basket: state.basket,
 }));
 
 const Basket = () => {
-  const { basket } = useUsers();
+  const { basket } = useBasket();
   console.log('basket:', basket);
 
   return (

@@ -4,6 +4,7 @@ import { fetchUsers, fetchBasket } from '../store/actions';
 import UserList from '../components/UserList';
 import Basket from '../components/Basket';
 import Layout from '../components/Layout';
+import ErrorDisplay from '../components/ErrorDisplay';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,13 @@ const Main = () => {
     dispatch(fetchBasket());
   }, [dispatch]);
   return (
-    <Layout>
-      <UserList />
-      <Basket />
-    </Layout>
+    <>
+      <ErrorDisplay />
+      <Layout>
+        <UserList />
+        <Basket />
+      </Layout>
+    </>
   );
 };
 

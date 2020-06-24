@@ -36,3 +36,7 @@ export const displayErrorMessage = (message) => ({
   type: types.DISPLAY_ERROR_MESSAGE,
   payload: { message },
 });
+
+export const hideErrorMessage = () => ({
+  type: types.HIDE_ERROR_MESSAGE,
+});

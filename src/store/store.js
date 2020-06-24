@@ -34,6 +34,11 @@ function reducer(state = INITIAL_STATE, { type, payload }) {
           ...state,
           error: payload.message,
         } : state;
+    case types.HIDE_ERROR_MESSAGE:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
