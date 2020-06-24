@@ -1,14 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-
-const BasketItem = styled.div`
-  background-color: #528ce0;
-  padding: 15px;
-  width: 250px;
-  margin: 15px 0;
-  color: white;
-`;
+import {
+  Column, ListTitle, List, Item,
+} from './ListStyles';
 
 const useBasket = () => useSelector((state) => ({
   basket: state.basket,
@@ -16,19 +10,20 @@ const useBasket = () => useSelector((state) => ({
 
 const Basket = () => {
   const { basket } = useBasket();
-  console.log('basket:', basket);
 
   return (
-    <div>
-      <h2>Basket</h2>
-      {Array.isArray(basket) && basket.map((item) => (
-        <BasketItem key={item}>
-          <h3>
-            {item}
-          </h3>
-        </BasketItem>
-      ))}
-    </div>
+    <Column>
+      <ListTitle>Basket</ListTitle>
+      <List>
+        {Array.isArray(basket) && basket.map((item) => (
+          <Item key={item}>
+            <span>
+              {item}
+            </span>
+          </Item>
+        ))}
+      </List>
+    </Column>
   );
 };
 

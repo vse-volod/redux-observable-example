@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUsers, fetchBasket } from '../store/actions';
+import Navbar from '../components/Navbar';
 import UserList from '../components/UserList';
 import Basket from '../components/Basket';
 import Layout from '../components/Layout';
@@ -15,6 +16,7 @@ const Main = () => {
   }, [dispatch]);
   return (
     <>
+      <Navbar>Alyce - Test Task</Navbar>
       <ErrorDisplay />
       <Layout>
         <UserList />
